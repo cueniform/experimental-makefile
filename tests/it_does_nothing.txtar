@@ -1,0 +1,6 @@
+symlink Makefile -> $SOURCE/../Makefile
+exec make
+cmp stdout nothing
+
+-- nothing --
+make: Nothing to be done for 'tfjson'.

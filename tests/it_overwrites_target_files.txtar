@@ -1,0 +1,17 @@
+symlink Makefile -> $SOURCE/../Makefile
+
+# it overwrites .tf.json files if Make decides the file needs to be remade
+exec touch --no-create --date yesterday test.tf.json
+exec make
+cmp test.tf.json test.cmp
+
+-- test.tf.cue --
+foo: true
+
+-- test.tf.json --
+dummy content
+
+-- test.cmp --
+{
+    "foo": true
+}

@@ -1,0 +1,17 @@
+symlink Makefile -> $SOURCE/../Makefile
+# `make clean` ignores .tf.json files with no matching .tf.cue file
+exec make
+cmp test.tf.json test.cmp
+exec make clean
+! exists test.tf.json
+exists no-matching-cue-file.tf.json
+
+-- test.tf.cue --
+foo: true
+
+-- test.cmp --
+{
+    "foo": true
+}
+-- no-matching-cue-file.tf.json --
+dummy content

@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+command -v testscript >/dev/null || { echo "Tool not present: testscript"; exit 1; }
+
+for T in "$@"; do
+    echo "# $T"
+    testscript -e SOURCE=$PWD "$T"
+done

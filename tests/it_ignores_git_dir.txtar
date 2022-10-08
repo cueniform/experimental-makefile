@@ -1,0 +1,9 @@
+symlink Makefile -> $SOURCE/../Makefile
+grep 'foo: true' .git/test.tf.cue
+
+# a source file inside .git doesn't get processed
+exec make
+! exists .git/test.tf.json
+
+-- .git/test.tf.cue --
+foo: true

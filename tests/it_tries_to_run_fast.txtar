@@ -1,0 +1,9 @@
+symlink Makefile -> $SOURCE/../Makefile
+
+# The --no-builtin-rules flag is present and obeyed
+exec make --print-data-base
+stdout '# 1 implicit rules'
+
+# The --no-builtin-variables flag is present and obeyed
+exec make --print-data-base
+! stdout '^CC ='

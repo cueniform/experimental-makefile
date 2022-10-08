@@ -1,0 +1,8 @@
+symlink Makefile -> $SOURCE/../Makefile
+
+# it doesn't show the `cue export` command executed for each source file
+exec make
+! stdout 'cue export'
+
+-- test.tf.cue --
+foo: true

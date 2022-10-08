@@ -1,0 +1,28 @@
+symlink Makefile -> $SOURCE/../Makefile
+
+# generating a .tf.json file in a directory
+# it shows the relative path of the source and generated files
+exec make
+stdout '^# foo/test.tf.cue > foo/test.tf.json'
+
+# it puts the generated file in the same dir as the source
+exists foo/test.tf.json
+cmp foo/test.tf.json test.cmp
+
+-- foo/test.tf.cue --
+foo: {
+  bar: {
+    baz: true
+  }
+}
+quux: 123
+
+-- test.cmp --
+{
+    "foo": {
+        "bar": {
+            "baz": true
+        }
+    },
+    "quux": 123
+}
